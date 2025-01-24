@@ -24,7 +24,7 @@ model Author {
   id        String   @id @default(uuid())
   name      String
   bio       String
-  birthDate DateTime
+  birthDate DateTime @db.Timestamptz(0)
   Book      Book[]
 
   @@map("author")
@@ -37,5 +37,7 @@ model Book {
   authorId     String
   author       Author   @relation(fields: [authorId], references: [id])
 
+  @@index([title])
+  @@index([authorId])
   @@map("book")
 }

@@ -11,7 +11,7 @@ CREATE TABLE "author" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "bio" TEXT NOT NULL,
-    "birthDate" TIMESTAMP(3) NOT NULL,
+    "birthDate" TIMESTAMPTZ(0) NOT NULL,
 
     CONSTRAINT "author_pkey" PRIMARY KEY ("id")
 );
