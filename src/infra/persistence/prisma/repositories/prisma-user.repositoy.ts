@@ -1,4 +1,4 @@
-import { UserRepository } from '@app/application/books-cms/ports/user.repositoy';
+import { UserRepository } from '@app/application/books-cms/ports/user.repository';
 import { User } from '@app/domain/books-cms/user';
 import { Injectable } from '@nestjs/common';
 

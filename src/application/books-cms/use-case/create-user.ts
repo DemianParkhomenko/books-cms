@@ -1,7 +1,7 @@
 import { User } from '@app/domain/books-cms/user';
 import { Injectable } from '@nestjs/common';
 
-import { UserRepository } from '../ports/user.repositoy';
+import { UserRepository } from '../ports/user.repository';
 
 interface CreateUserUseCaseCommand {
   name: string;

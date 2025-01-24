@@ -19,7 +19,7 @@ export class UserController {
   @CacheKey('users')
   @UseInterceptors(HttpCacheInterceptor)
   getAll() {
-    const response = this.getUserUseCase.execute({});
+    const response = this.getUserUseCase.execute({ id: '1' });
     return response;
   }
 

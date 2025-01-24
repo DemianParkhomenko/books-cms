@@ -1,4 +1,4 @@
-import { UserRepository } from '@app/application/books-cms/ports/user.repositoy';
+import { UserRepository } from '@app/application/books-cms/ports/user.repository';
 import { EnvModule } from '@app/infra/env';
 import { Module } from '@nestjs/common';
 

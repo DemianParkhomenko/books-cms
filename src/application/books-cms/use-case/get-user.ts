@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
 
-import { UserRepository } from '../ports/user.repositoy';
+import { UserRepository } from '../ports/user.repository';
 
-interface GetUserUseCaseCommand {}
+interface GetUserUseCaseCommand {
+  id: string;
+}
 
 @Injectable()
 export class GetUserUseCase {
   constructor(private userRepository: UserRepository) {}
 
   async execute({}: GetUserUseCaseCommand): Promise<any> {
-    const response = await this.userRepository.findMany();
+    const response = {};
 
     return response;
   }
