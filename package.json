@@ -18,7 +18,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:unit": "jest --config ./jest-unit.json",
-    "test:e2e": "jest --config ./jest-e2e.json"
+    "test:e2e": "jest --config ./jest-e2e.json",
+    "ts:check": "echo \"Checking TypeScript...\" && tsc -p tsconfig.json"
   },
   "dependencies": {
     "@apollo/server": "4.11.3",
