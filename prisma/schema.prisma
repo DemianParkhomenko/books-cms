@@ -19,3 +19,23 @@ model User {
 
   @@map("user")
 }
+
+model Author {
+  id        String   @id @default(uuid())
+  name      String
+  bio       String
+  birthDate DateTime
+  Book      Book[]
+
+  @@map("author")
+}
+
+model Book {
+  id           String   @id @default(uuid())
+  title        String
+  publicizedAt DateTime @db.Timestamptz(0)
+  authorId     String
+  author       Author   @relation(fields: [authorId], references: [id])
+
+  @@map("book")
+}

@@ -3,14 +3,12 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { DevtoolsModule } from '@nestjs/devtools-integration';
 import { GraphQLModule } from '@nestjs/graphql';
-import { BooksCmsModule } from './application/books-cms/books-cms.module';
+import { BooksModule } from './infra/graphql/books/books.module';
 import { UsersModule } from './infra/graphql/users/users.module';
 import { PersistenceModule } from './infra/persistence/persistence.module';
 
 @Module({
   imports: [
-    BooksCmsModule,
-    UsersModule,
     DevtoolsModule.register({
       http: process.env.NODE_ENV !== 'production',
     }),
@@ -18,6 +16,8 @@ import { PersistenceModule } from './infra/persistence/persistence.module';
       global: true,
       type: 'prisma',
     }),
+    UsersModule,
+    BooksModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'graphql/schema.graphql',

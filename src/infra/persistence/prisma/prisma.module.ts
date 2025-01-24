@@ -1,18 +1,24 @@
-import { UserRepository } from '@app/application/books-cms/ports/user.repository';
 import { EnvModule } from '@app/infra/env';
 import { Module } from '@nestjs/common';
 
+import { BooksRepository } from '@app/application/ports/books.repository';
+import { UsersRepository } from '@app/application/ports/users.repository';
 import { PrismaService } from './prisma.service';
-import { PrismaUserRepository } from './repositories/prisma-user.repositoy';
+import { PrismaBooksRepository } from './repositories/prisma-books.repository';
+import { PrismaUsersRepository } from './repositories/prisma-users.repository';
 
 @Module({
-  exports: [PrismaService, UserRepository],
+  exports: [PrismaService, UsersRepository, BooksRepository],
   imports: [EnvModule],
   providers: [
     PrismaService,
     {
-      provide: UserRepository,
-      useClass: PrismaUserRepository,
+      provide: UsersRepository,
+      useClass: PrismaUsersRepository,
+    },
+    {
+      provide: BooksRepository,
+      useClass: PrismaBooksRepository,
     },
   ],
 })

@@ -1,4 +1,4 @@
-import { User } from '@app/domain/books-cms/user';
+import { User } from '@app/domain/user';
 import { Prisma, User as PrismaUser } from '@prisma/client';
 
 export class PrismaUserMapper {
