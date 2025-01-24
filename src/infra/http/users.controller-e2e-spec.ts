@@ -6,7 +6,7 @@ import request from 'supertest';
 import { CacheManagerModule } from '../persistence/cache/cache.module';
 import { PersistenceModule } from '../persistence/persistence.module';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UserController } from './user.controller';
+import { UserController } from './users.controller';
 
 describe('UsersController', () => {
   let httpServer: any;

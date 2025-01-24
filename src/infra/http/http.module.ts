@@ -3,7 +3,7 @@ import { GetUserUseCase } from '@app/application/books-cms/use-case/get-user';
 import { CacheManagerModule } from '@app/infra/persistence/cache/cache.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { UserController } from './user.controller';
+import { UserController } from './users.controller';
 
 @Module({
   controllers: [AppController, UserController],
