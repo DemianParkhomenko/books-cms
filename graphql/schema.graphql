@@ -4,6 +4,7 @@
 
 type User {
   name: String!
+  email: String!
 }
 
 type Book {
@@ -21,6 +22,10 @@ scalar DateTime
 type Books {
   node: [Book!]!
   nextCursor: String!
+}
+
+type AuthResponse {
+  access_token: String!
 }
 
 type Query {
@@ -58,14 +63,22 @@ enum SortDirection {
 }
 
 type Mutation {
+  login(authInput: AuthInput!): AuthResponse!
   createUser(createUserInput: CreateUserInput!): User!
   createBook(createBookInput: CreateBookInput!): Book!
   updateBook(updateBookInput: UpdateBookInput!): Book!
   removeBook(id: String!): Book!
 }
 
+input AuthInput {
+  email: String!
+  password: String!
+}
+
 input CreateUserInput {
   name: String!
+  email: String!
+  password: String!
 }
 
 input CreateBookInput {

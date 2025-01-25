@@ -11,12 +11,14 @@ async function main() {
   await prisma.user.create({
     data: {
       name: 'John Doe',
+      email: 'example@gmail.com',
     },
   });
 
   await prisma.user.create({
     data: {
       name: 'Jane Smith',
+      email: 'example2@gmail.com',
     },
   });
 

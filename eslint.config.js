@@ -18,6 +18,7 @@ module.exports = [
       prettier: prettierPlugin,
     },
     rules: {
+      ignoreRestSiblings: true,
       ...typescriptPlugin.configs.recommended.rules,
       'prettier/prettier': 'error',
       '@typescript-eslint/interface-name-prefix': 'off',

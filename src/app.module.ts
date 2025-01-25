@@ -6,6 +6,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { PersistenceModule } from './infra/persistence/persistence.module';
 import { UsersModule } from './application/services/users.module';
 import { BooksModule } from './application/services/books.module';
+import { AuthModule } from './application/services/auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -16,6 +18,7 @@ import { BooksModule } from './application/services/books.module';
       global: true,
       type: 'prisma',
     }),
+    AuthModule,
     UsersModule,
     BooksModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
