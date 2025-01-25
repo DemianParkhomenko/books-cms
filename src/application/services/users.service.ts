@@ -12,4 +12,8 @@ export class UsersService {
     console.log('service user', user);
     return await this.usersRepository.create(user);
   }
+
+  async list() {
+    return await this.usersRepository.list();
+  }
 }

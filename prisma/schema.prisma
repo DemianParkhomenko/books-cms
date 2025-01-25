@@ -21,7 +21,7 @@ model User {
 }
 
 model Author {
-  id        String   @id @default(uuid())
+  id        String   @id @default(uuid(7))
   name      String
   bio       String
   birthDate DateTime @db.Timestamptz(0)
@@ -31,12 +31,13 @@ model Author {
 }
 
 model Book {
-  id           String   @id @default(uuid())
-  title        String
-  publicizedAt DateTime @db.Timestamptz(0)
-  authorId     String
-  author       Author   @relation(fields: [authorId], references: [id])
+  id              Int      @id @default(autoincrement())
+  title           String
+  publicationDate DateTime @db.Timestamptz(0)
+  authorId        String
+  author          Author   @relation(fields: [authorId], references: [id])
 
+  @@index([publicationDate])
   @@index([title])
   @@index([authorId])
   @@map("book")

@@ -1,16 +1,25 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, GraphQLISODateTime, ID } from '@nestjs/graphql';
 
 @ObjectType()
 export class Book {
   @Field()
   authorId: string;
 
-  @Field({ nullable: true })
-  id?: string;
+  @Field(() => ID)
+  id: number;
 
-  @Field(() => Int)
-  publicizedAt: number;
+  @Field(() => GraphQLISODateTime)
+  publicationDate: Date;
 
   @Field()
   title: string;
+}
+
+@ObjectType()
+export class Books {
+  @Field(() => [Book])
+  node: Book[];
+
+  @Field()
+  nextCursor: string;
 }

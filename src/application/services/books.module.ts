@@ -1,6 +1,6 @@
 import { BooksService } from '@app/application/services/books.service';
+import { BooksResolver } from '@app/infra/graphql/books/books.resolver';
 import { Module } from '@nestjs/common';
-import { BooksResolver } from './books.resolver';
 
 @Module({
   providers: [BooksResolver, BooksService],

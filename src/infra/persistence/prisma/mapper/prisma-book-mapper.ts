@@ -8,16 +8,17 @@ export class PrismaBookMapper {
       id: entity.id,
       authorId: entity.authorId,
       title: entity.title,
-      publicationDate: entity.publicizedAt,
+      publicationDate: entity.publicationDate,
     });
     return model;
   }
 
   static toPrisma(book: Book): Prisma.BookUncheckedCreateInput {
     return {
-      authorId: book.getAuthorId(),
-      title: book.getTitle(),
-      publicizedAt: book.getPublicationDate(),
+      authorId: book.authorId,
+      title: book.title,
+      publicationDate: book.publicationDate,
+      id: book.id,
     };
   }
 }

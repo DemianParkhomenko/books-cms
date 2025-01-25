@@ -1,12 +1,12 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
+import { Field, GraphQLISODateTime, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class CreateBookInput {
   @Field()
   authorId: string;
 
-  @Field(() => Int)
-  publicizedAt: number;
+  @Field(() => GraphQLISODateTime)
+  publicationDate: Date;
 
   @Field()
   title: string;

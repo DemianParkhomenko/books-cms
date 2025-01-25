@@ -18,13 +18,22 @@ CREATE TABLE "author" (
 
 -- CreateTable
 CREATE TABLE "book" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
-    "publicizedAt" TIMESTAMPTZ(0) NOT NULL,
+    "publicationDate" TIMESTAMPTZ(0) NOT NULL,
     "authorId" TEXT NOT NULL,
 
     CONSTRAINT "book_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE INDEX "book_publicationDate_idx" ON "book"("publicationDate");
+
+-- CreateIndex
+CREATE INDEX "book_title_idx" ON "book"("title");
+
+-- CreateIndex
+CREATE INDEX "book_authorId_idx" ON "book"("authorId");
 
 -- AddForeignKey
 ALTER TABLE "book" ADD CONSTRAINT "book_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "author"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

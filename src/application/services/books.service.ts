@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
 import { Book, BookProps } from '@app/domain/book';
-import { BooksRepository } from '../ports/books.repository';
+import {
+  BooksRepository,
+  BooksRepositoryListParams,
+} from '../ports/books.repository';
 
 @Injectable()
 export class BooksService {
@@ -12,19 +15,19 @@ export class BooksService {
     return await this.booksRepository.create(user);
   }
 
-  async delete(id: string) {
+  async delete(id: number) {
     return await this.booksRepository.delete(id);
   }
 
-  async update(id: string, params: Omit<BookProps, 'id' | 'publicizedAt'>) {
+  async update(id: number, params: Omit<BookProps, 'id' | 'publicationDate'>) {
     return await this.booksRepository.update(id, params);
   }
 
-  async list() {
-    return await this.booksRepository.list();
+  async list(params: BooksRepositoryListParams) {
+    return await this.booksRepository.list(params);
   }
 
-  async get(id: string) {
+  async get(id: number) {
     return await this.booksRepository.get(id);
   }
 }

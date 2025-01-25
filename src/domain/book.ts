@@ -2,7 +2,7 @@ import { Entity } from '@app/core/entities/entity';
 
 export interface BookProps {
   authorId: string;
-  id?: string;
+  id?: number;
   publicationDate: Date;
   title: string;
 }
@@ -12,19 +12,19 @@ export class Book extends Entity<BookProps> {
     super(props);
   }
 
-  getId(): string {
+  get id(): number {
     return this.props.id;
   }
 
-  getTitle(): string {
+  get title(): string {
     return this.props.title;
   }
 
-  getAuthorId(): string {
+  get authorId(): string {
     return this.props.authorId;
   }
 
-  getPublicationDate(): Date {
+  get publicationDate(): Date {
     return this.props.publicationDate;
   }
 }

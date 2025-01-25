@@ -3,9 +3,9 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { DevtoolsModule } from '@nestjs/devtools-integration';
 import { GraphQLModule } from '@nestjs/graphql';
-import { BooksModule } from './infra/graphql/books/books.module';
-import { UsersModule } from './infra/graphql/users/users.module';
 import { PersistenceModule } from './infra/persistence/persistence.module';
+import { UsersModule } from './application/services/users.module';
+import { BooksModule } from './application/services/books.module';
 
 @Module({
   imports: [

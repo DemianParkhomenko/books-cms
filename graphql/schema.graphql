@@ -2,20 +2,59 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Book {
-  authorId: String!
-  id: String
-  publicizedAt: Int!
-  title: String!
-}
-
 type User {
   name: String!
 }
 
+type Book {
+  authorId: String!
+  id: ID!
+  publicationDate: DateTime!
+  title: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Books {
+  node: [Book!]!
+  nextCursor: String!
+}
+
 type Query {
-  books: [Book!]!
+  users: [User!]!
+  books(listBookInput: ListBookInput!): Books!
   book(id: String!): Book!
+}
+
+input ListBookInput {
+  authorId: String
+  publicationDate: DateTime
+  title: String
+  id: String
+  minPublicationYear: Int
+  maxPublicationYear: Int
+  cursor: String
+  sort: SortInput
+}
+
+input SortInput {
+  field: SortField!
+  direction: SortDirection!
+}
+
+"""The field by which to sort"""
+enum SortField {
+  TITLE
+  PUBLICATION_DATE
+}
+
+"""The direction in which to sort"""
+enum SortDirection {
+  ASC
+  DESC
 }
 
 type Mutation {
@@ -31,13 +70,13 @@ input CreateUserInput {
 
 input CreateBookInput {
   authorId: String!
-  publicizedAt: Int!
+  publicationDate: DateTime!
   title: String!
 }
 
 input UpdateBookInput {
   authorId: String!
-  publicizedAt: Int
+  publicationDate: DateTime
   title: String!
   id: String!
 }
