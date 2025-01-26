@@ -1,19 +1,18 @@
-import { EnvModule, EnvService } from '@app/infra/env';
+import { Global, Module } from '@nestjs/common';
 import { CacheModule } from '@nestjs/cache-manager';
-import { Module } from '@nestjs/common';
+import KeyvRedis from '@keyv/redis';
+import { EnvModule, EnvService } from '@app/infra/env';
 
 @Module({
-  exports: [CacheModule],
   imports: [
     CacheModule.registerAsync({
       imports: [EnvModule],
-      inject: [EnvService],
-      isGlobal: false,
-      useFactory: async (configService: EnvService) => ({
-        max: configService.get('CACHE_MAX'),
-        ttl: configService.get('CACHE_TTL'),
+      useFactory: async (envService: EnvService) => ({
+        stores: [new KeyvRedis(envService.get('REDIS_CONNECTION_STRING'))],
       }),
+      inject: [EnvService],
     }),
   ],
+  exports: [CacheModule],
 })
 export class CacheManagerModule {}

@@ -12,6 +12,7 @@ interface DatabaseOptions {
 export class PersistenceModule {
   static async register({
     global = false,
+    // Conditionally change data source if needed
     type,
   }: DatabaseOptions): Promise<DynamicModule> {
     return {

@@ -6,10 +6,11 @@ import { UsersRepository } from '@app/application/ports/users.repository';
 import { PrismaService } from './prisma.service';
 import { PrismaBooksRepository } from './repositories/prisma-books.repository';
 import { PrismaUsersRepository } from './repositories/prisma-users.repository';
+import { CacheManagerModule } from '../cache/cache.module';
 
 @Module({
   exports: [PrismaService, UsersRepository, BooksRepository],
-  imports: [EnvModule],
+  imports: [EnvModule, CacheManagerModule],
   providers: [
     PrismaService,
     {

@@ -10,6 +10,15 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { GqlThrottlerGuard, MILLISECOND } from './lib';
 import { APP_GUARD } from '@nestjs/core';
 import { BooksReviewModule } from './application/services/book-reviews.module';
+import { CacheManagerModule } from './infra/persistence/cache/cache.module';
+
+const graphql = GraphQLModule.forRoot<ApolloDriverConfig>({
+  driver: ApolloDriver,
+  autoSchemaFile: 'graphql/schema.graphql',
+  playground: false,
+  plugins: [ApolloServerPluginLandingPageLocalDefault()],
+  context: ({ req, res }) => ({ req, res }),
+});
 
 @Module({
   imports: [
@@ -19,13 +28,7 @@ import { BooksReviewModule } from './application/services/book-reviews.module';
     UsersModule,
     BooksModule,
     BooksReviewModule,
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: 'graphql/schema.graphql',
-      playground: false,
-      plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      context: ({ req, res }) => ({ req, res }),
-    }),
+    graphql,
   ],
   providers: [{ provide: APP_GUARD, useClass: GqlThrottlerGuard }],
 })

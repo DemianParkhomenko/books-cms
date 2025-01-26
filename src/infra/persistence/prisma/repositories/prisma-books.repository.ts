@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 
 import {
   BooksRepository,
@@ -8,10 +8,14 @@ import { Book, BookProps } from '@app/domain/book';
 import { PrismaBookMapper } from '../mapper/prisma-book-mapper';
 import { PrismaService } from '../prisma.service';
 import { decodeCursor, encodeCursor } from '@app/lib';
+import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 
 @Injectable()
 export class PrismaBooksRepository implements BooksRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) {}
 
   private buildPublicationDateQuery(params: BooksRepositoryListParams) {
     const { publicationDate, minPublicationYear, maxPublicationYear } = params;
@@ -55,6 +59,11 @@ export class PrismaBooksRepository implements BooksRepository {
   async list(
     params: BooksRepositoryListParams,
   ): Promise<{ books: Book[]; nextCursor: string | null }> {
+    const cacheKey = `books:${JSON.stringify(params)}`;
+    const cached = await this.cacheManager.get<any>(cacheKey);
+    if (cached) {
+      return cached;
+    }
     const { authorId, id, title, limit = 10, sort } = params;
     const publicationDateQuery = this.buildPublicationDateQuery(params);
     const cursor = params.cursor ? decodeCursor(params.cursor) : null;
@@ -76,6 +85,8 @@ export class PrismaBooksRepository implements BooksRepository {
 
     const nextCursor =
       books.length === limit ? encodeCursor({ id: books.at(-1)?.id }) : null;
+
+    await this.cacheManager.set(cacheKey, { books, nextCursor });
 
     return {
       books: books.map(PrismaBookMapper.toDomain),
