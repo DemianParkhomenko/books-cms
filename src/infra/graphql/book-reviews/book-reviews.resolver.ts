@@ -3,8 +3,8 @@ import { BookReviewsService } from '@app/application/services/book-reviews.servi
 import { CreateBookReviewInput } from './dto/create-book-review.input';
 import { BookReview } from './entities/book-review';
 import { UseGuards } from '@nestjs/common';
-import { GqlRolesGuard, Roles } from '@app/lib';
 import { Role } from '@prisma/client';
+import { GqlRolesGuard, Roles } from '@app/lib/utils/guards';
 
 @Resolver(() => BookReview)
 export class BookReviewsResolver {

@@ -1,4 +1,4 @@
-import { Entity } from '@app/core/entities/entity';
+import { Entity } from './shared/entities/entity';
 
 export interface BookReviewProps {
   bookId: string;

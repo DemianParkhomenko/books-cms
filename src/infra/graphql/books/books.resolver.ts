@@ -6,7 +6,7 @@ import { Book, Books } from './entities/book.entity';
 import { ListBookInput } from './dto/list-book.input';
 import { UseGuards } from '@nestjs/common';
 import { Role } from '@prisma/client';
-import { GqlAuthGuard, GqlRolesGuard, Roles } from '@app/lib';
+import { GqlAuthGuard, GqlRolesGuard, Roles } from '@app/lib/utils/guards';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Book)

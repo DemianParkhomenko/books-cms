@@ -3,7 +3,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { User } from './entities/user.entity';
 import { UseGuards } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
-import { GqlAuthGuard } from '@app/lib';
+import { GqlAuthGuard } from '@app/lib/utils/guards';
 
 @Resolver(() => User)
 export class UsersResolver {

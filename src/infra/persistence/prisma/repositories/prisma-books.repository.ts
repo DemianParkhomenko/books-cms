@@ -7,8 +7,8 @@ import {
 import { Book, BookProps } from '@app/domain/book';
 import { PrismaBookMapper } from '../mapper/prisma-book-mapper';
 import { PrismaService } from '../prisma.service';
-import { decodeCursor, encodeCursor } from '@app/lib';
 import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
+import { decodeCursor, encodeCursor } from '@app/lib/utils/misc';
 
 @Injectable()
 export class PrismaBooksRepository implements BooksRepository {
