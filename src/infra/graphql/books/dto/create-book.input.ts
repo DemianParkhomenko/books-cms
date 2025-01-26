@@ -1,4 +1,5 @@
 import { Field, GraphQLISODateTime, InputType } from '@nestjs/graphql';
+import { Length } from 'class-validator';
 
 @InputType()
 export class CreateBookInput {
@@ -9,5 +10,6 @@ export class CreateBookInput {
   publicationDate: Date;
 
   @Field()
+  @Length(2, 30)
   title: string;
 }
