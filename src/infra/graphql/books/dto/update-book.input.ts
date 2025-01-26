@@ -1,6 +1,6 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql';
 import { CreateBookInput } from './create-book.input';
-import { IsUUID, Length } from 'class-validator';
+import { Length } from 'class-validator';
 
 @InputType()
 export class UpdateBookInput extends PartialType(CreateBookInput) {

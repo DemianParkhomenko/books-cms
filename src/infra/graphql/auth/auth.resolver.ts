@@ -1,5 +1,5 @@
 import { AuthService } from '@app/application/services/auth/auth.service';
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { AuthInput } from './dto/auth.input';
 import { AuthResponse } from './dto/auth.response';
 

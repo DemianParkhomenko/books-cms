@@ -5,7 +5,7 @@ import { DynamoDBBookReviewMapper } from '../mapper/dynamodb-book-review-mapper'
 import { BookReviewsRepository } from '@app/application/ports/book-reviews.repository';
 import { BookReview } from '@app/domain/book-review';
 import { PutCommand } from '@aws-sdk/lib-dynamodb';
-import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
+import { unmarshall } from '@aws-sdk/util-dynamodb';
 
 @Injectable()
 export class DynamoDBBookReviewsRepository implements BookReviewsRepository {

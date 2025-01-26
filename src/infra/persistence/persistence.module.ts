@@ -13,7 +13,7 @@ export class PersistenceModule {
   static async register({
     global = false,
     // Conditionally change data source if needed
-    type,
+    // type,
   }: DatabaseOptions): Promise<DynamicModule> {
     return {
       exports: [PrismaModule, DynamoDBModule],

@@ -3,7 +3,6 @@ import { PrismaBooksRepository } from './prisma-books.repository';
 import { PrismaService } from '../prisma.service';
 import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 import { BooksRepositoryListParams } from '@app/application/ports/books.repository';
-import { PrismaBookMapper } from '../mapper/prisma-book-mapper';
 import { Book } from '@app/domain/book';
 
 jest.mock('../mapper/prisma-book-mapper');
