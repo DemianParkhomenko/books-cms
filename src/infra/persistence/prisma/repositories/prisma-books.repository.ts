@@ -7,7 +7,7 @@ import {
 import { Book, BookProps } from '@app/domain/book';
 import { PrismaBookMapper } from '../mapper/prisma-book-mapper';
 import { PrismaService } from '../prisma.service';
-import { decodeCursor, encodeCursor } from '@app/infra/utils';
+import { decodeCursor, encodeCursor } from '@app/lib';
 
 @Injectable()
 export class PrismaBooksRepository implements BooksRepository {

@@ -4,9 +4,9 @@ import { CreateBookInput } from './dto/create-book.input';
 import { UpdateBookInput } from './dto/update-book.input';
 import { Book, Books } from './entities/book.entity';
 import { ListBookInput } from './dto/list-book.input';
-import { GqlAuthGuard, GqlRolesGuard, Roles } from '@app/infra/utils/guards';
 import { UseGuards } from '@nestjs/common';
 import { Role } from '@prisma/client';
+import { GqlAuthGuard, GqlRolesGuard, Roles } from '@app/lib';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Book)

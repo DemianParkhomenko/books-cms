@@ -25,7 +25,9 @@
       "@app/domain": ["src/domain"],
       "@app/domain/*": ["src/domain/*"],
       "@app/infra": ["src/infra"],
-      "@app/infra/*": ["src/infra/*"]
+      "@app/infra/*": ["src/infra/*"],
+      "@app/lib": ["src/lib"],
+      "@app/lib/*": ["src/lib/*"]
     }
   }
 }
