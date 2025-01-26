@@ -2,9 +2,13 @@ import {
   Injectable,
   ExecutionContext,
   createParamDecorator,
+  CanActivate,
+  SetMetadata,
 } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
+import { Role } from '@prisma/client';
 
 @Injectable()
 export class GqlAuthGuard extends AuthGuard('jwt') {
@@ -32,3 +36,24 @@ export class GqlLocalAuthGuard extends AuthGuard('local') {
     return gqlContext.req;
   }
 }
+
+@Injectable()
+export class GqlRolesGuard implements CanActivate {
+  constructor(private reflector: Reflector) {}
+
+  async canActivate(context: ExecutionContext) {
+    const roles = this.reflector.getAllAndOverride<Role[]>('roles', [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    const req = GqlExecutionContext.create(context).getContext().req;
+
+    if (req?.user) {
+      return roles.includes(req.user.role);
+    }
+
+    return false;
+  }
+}
+
+export const Roles = (...roles: Array<Role>) => SetMetadata('roles', roles);

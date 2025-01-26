@@ -64,7 +64,7 @@ enum SortDirection {
 
 type Mutation {
   login(authInput: AuthInput!): AuthResponse!
-  createUser(createUserInput: CreateUserInput!): User!
+  signUp(createUserInput: CreateUserInput!): User!
   createBook(createBookInput: CreateBookInput!): Book!
   updateBook(updateBookInput: UpdateBookInput!): Book!
   removeBook(id: String!): Book!

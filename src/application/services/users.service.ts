@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { User, UserProps } from '@app/domain/user';
 import { UsersRepository } from '../ports/users.repository';
-import { hashPassword } from './auth/utils';
+import { hashPassword } from '@app/infra/utils';
 
 @Injectable()
 export class UsersService {

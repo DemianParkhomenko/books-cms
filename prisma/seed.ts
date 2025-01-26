@@ -1,4 +1,5 @@
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from '@prisma/client';
+import { hashPassword } from '../src/infra/utils/crypto';
 
 const prisma = new PrismaClient();
 
@@ -12,6 +13,16 @@ async function main() {
     data: {
       name: 'John Doe',
       email: 'example@gmail.com',
+      password: await hashPassword('password'),
+    },
+  });
+
+  await prisma.user.create({
+    data: {
+      name: 'Demian Parkhomenko',
+      email: 'admin@gmail.com',
+      password: await hashPassword('qwerty'),
+      role: 'ADMIN',
     },
   });
 
@@ -19,6 +30,7 @@ async function main() {
     data: {
       name: 'Jane Smith',
       email: 'example2@gmail.com',
+      password: await hashPassword('password'),
     },
   });
 

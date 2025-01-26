@@ -4,11 +4,17 @@ import { CreateBookInput } from './dto/create-book.input';
 import { UpdateBookInput } from './dto/update-book.input';
 import { Book, Books } from './entities/book.entity';
 import { ListBookInput } from './dto/list-book.input';
+import { GqlAuthGuard, GqlRolesGuard, Roles } from '@app/infra/utils/guards';
+import { UseGuards } from '@nestjs/common';
+import { Role } from '@prisma/client';
 
+@UseGuards(GqlAuthGuard)
 @Resolver(() => Book)
 export class BooksResolver {
   constructor(private readonly booksService: BooksService) {}
 
+  @UseGuards(GqlRolesGuard)
+  @Roles(Role.ADMIN)
   @Mutation(() => Book)
   async createBook(@Args('createBookInput') createBookInput: CreateBookInput) {
     return await this.booksService.create(createBookInput);
@@ -34,11 +40,15 @@ export class BooksResolver {
     return await this.booksService.get(+id);
   }
 
+  @UseGuards(GqlRolesGuard)
+  @Roles(Role.ADMIN)
   @Mutation(() => Book)
   async updateBook(@Args('updateBookInput') updateBookInput: UpdateBookInput) {
     return await this.booksService.update(+updateBookInput.id, updateBookInput);
   }
 
+  @UseGuards(GqlRolesGuard)
+  @Roles(Role.ADMIN)
   @Mutation(() => Book)
   async removeBook(@Args('id') id: string) {
     return await this.booksService.delete(+id);
