@@ -9,6 +9,7 @@ import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from '@prisma/client';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Injectable()
 export class GqlAuthGuard extends AuthGuard('jwt') {
@@ -57,3 +58,12 @@ export class GqlRolesGuard implements CanActivate {
 }
 
 export const Roles = (...roles: Array<Role>) => SetMetadata('roles', roles);
+
+@Injectable()
+export class GqlThrottlerGuard extends ThrottlerGuard {
+  getRequestResponse(context: ExecutionContext) {
+    const gqlCtx = GqlExecutionContext.create(context);
+    const ctx = gqlCtx.getContext();
+    return { req: ctx.req, res: ctx.res };
+  }
+}
