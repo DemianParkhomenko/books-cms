@@ -1,0 +1,16 @@
+{
+  "TableName": "BookReviews",
+  "AttributeDefinitions": [
+    { "AttributeName": "bookId", "AttributeType": "S" },
+    { "AttributeName": "userId", "AttributeType": "S" }
+  ],
+  "KeySchema": [
+    { "AttributeName": "bookId", "KeyType": "HASH" },
+    { "AttributeName": "userId", "KeyType": "RANGE" }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 5,
+    "WriteCapacityUnits": 5
+  },
+  "TableClass": "STANDARD"
+}

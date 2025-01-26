@@ -7,6 +7,10 @@ export const envSchema = z.object({
   PORT: z.coerce.number().optional().default(3000),
   JWT_SECRET: z.string(),
   JWT_EXPIRES_IN: z.coerce.number().optional().default(100000),
+  AWS_REGION: z.string().optional().default('us-east-1'),
+  DYNAMODB_ENDPOINT: z.string(),
+  AWS_ACCESS_KEY_ID: z.string(),
+  AWS_SECRET_ACCESS_KEY: z.string(),
 });
 
 export type Env = z.infer<typeof envSchema>;

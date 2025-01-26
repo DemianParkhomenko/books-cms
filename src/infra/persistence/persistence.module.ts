@@ -1,6 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
 
 import { PrismaModule } from './prisma/prisma.module';
+import { DynamoDBModule } from './dynamodb/dynamodb.module';
 
 interface DatabaseOptions {
   global?: boolean;
@@ -14,9 +15,9 @@ export class PersistenceModule {
     type,
   }: DatabaseOptions): Promise<DynamicModule> {
     return {
-      exports: [PrismaModule],
+      exports: [PrismaModule, DynamoDBModule],
       global,
-      imports: [PrismaModule],
+      imports: [PrismaModule, DynamoDBModule],
       module: PersistenceModule,
     };
   }

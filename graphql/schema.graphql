@@ -28,10 +28,18 @@ type AuthResponse {
   access_token: String!
 }
 
+type BookReview {
+  bookId: String!
+  userId: String!
+  rating: Int!
+  comment: String!
+}
+
 type Query {
   users: [User!]!
   books(listBookInput: ListBookInput!): Books!
   book(id: String!): Book!
+  bookReviews: [BookReview!]!
 }
 
 input ListBookInput {
@@ -68,6 +76,7 @@ type Mutation {
   createBook(createBookInput: CreateBookInput!): Book!
   updateBook(updateBookInput: UpdateBookInput!): Book!
   removeBook(id: String!): Book!
+  addBookReview(createBookReviewInput: CreateBookReviewInput!): BookReview!
 }
 
 input AuthInput {
@@ -92,4 +101,11 @@ input UpdateBookInput {
   publicationDate: DateTime
   title: String!
   id: String!
+}
+
+input CreateBookReviewInput {
+  bookId: String!
+  userId: String!
+  rating: Int!
+  comment: String!
 }

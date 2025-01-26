@@ -1,15 +1,16 @@
 import { Entity } from '@app/core/entities/entity';
 
-export interface ReviewProps {
+export interface BookReviewProps {
   bookId: string;
   comment: string;
   id?: string;
   rating: number;
   userId: string;
+  reviewTimestamp: number;
 }
 
-export class Review extends Entity<ReviewProps> {
-  constructor(props: ReviewProps) {
+export class BookReview extends Entity<BookReviewProps> {
+  constructor(props: BookReviewProps) {
     super(props);
   }
 
@@ -31,5 +32,9 @@ export class Review extends Entity<ReviewProps> {
 
   get comment(): string {
     return this.props.comment;
+  }
+
+  get reviewTimestamp(): number {
+    return this.props.reviewTimestamp;
   }
 }

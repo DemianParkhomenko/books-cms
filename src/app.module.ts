@@ -9,6 +9,7 @@ import { AuthModule } from './application/services/auth/auth.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { GqlThrottlerGuard, MILLISECOND } from './lib';
 import { APP_GUARD } from '@nestjs/core';
+import { BooksReviewModule } from './application/services/book-reviews.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { APP_GUARD } from '@nestjs/core';
     AuthModule,
     UsersModule,
     BooksModule,
+    BooksReviewModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'graphql/schema.graphql',
