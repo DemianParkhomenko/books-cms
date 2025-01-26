@@ -7,7 +7,9 @@ import { AuthResponse } from './dto/auth.response';
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @Mutation(() => AuthResponse)
+  @Mutation(() => AuthResponse, {
+    description: 'Login with email and password',
+  })
   async login(@Args('authInput') authInput: AuthInput) {
     const user = await this.authService.validateUser(
       authInput.email,

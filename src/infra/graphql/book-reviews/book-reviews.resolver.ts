@@ -17,7 +17,7 @@ export class BookReviewsResolver {
     return await this.bookReviewsService.list();
   }
 
-  @Mutation(() => BookReview)
+  @Mutation(() => BookReview, { description: 'Add a book review.' })
   async addBookReview(
     @Args('createBookReviewInput') createBookReviewInput: CreateBookReviewInput,
   ): Promise<BookReview> {

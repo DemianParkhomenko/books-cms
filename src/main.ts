@@ -1,9 +1,10 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
 import { EnvService } from './infra/env/env.service';
+import { PrismaClientExceptionFilter } from 'nestjs-prisma';
+import { HttpAdapterHost } from '@nestjs/core';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -14,29 +15,10 @@ async function bootstrap() {
   const configService = app.get(EnvService);
   const port = configService.get('PORT');
 
-  function getSwaggerServerUrl() {
-    switch (process.env.NODE_ENV) {
-      case 'production':
-        return 'https://nestjs-ecommerce-alpha.vercel.app';
-      default:
-        return `http://localhost:${port}`;
-    }
-  }
+  app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: false }));
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: false,
-    }),
-  );
-
-  const config = new DocumentBuilder()
-    .setTitle('API')
-    .setVersion('0.1')
-    .addServer(getSwaggerServerUrl())
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
   await app.listen(port);
 }
