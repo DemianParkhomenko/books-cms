@@ -25,6 +25,8 @@ export function generateRandomString(length: number): string {
   return randomBytes(length).toString('hex');
 }
 
+// test
+// dsds
 export function generatePermalink(name: string): string {
   return name
     .toLowerCase()
